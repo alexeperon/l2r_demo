@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from math import log
 
 #I can't really work with Nicolò in my arms, but it's surely cute
 
@@ -13,18 +14,17 @@ def read_subtlex_file(subtlex_file_path):
 def get_n_most_frequent_words(freqs, n):
 	words_freqs = []
 	for word, freq in freqs.items():
-		words_freqs.append((freq, word))
+		words_freqs.append((log(freq,10)+3, word))
 	words_freqs.sort(reverse=True)
 	return words_freqs[:n]
 
 def plot_freq_against_rank(most_frequent_words):
-	frequencies = [freq for freq, _ in most_frequent_words]
-	ranks = range(1, len(frequencies)+1)
-	plt.plot(ranks, frequencies)
-	plt.plot(log(ranks), log(frequencies))
-	plt.xlabel('Rank')
-	plt.ylabel('Frequencies')
-	plt.show()
+    frequencies = [freq for freq, _ in most_frequent_words]
+    ranks = range(1, len(frequencies)+1)
+    plt.plot(ranks, frequencies)
+    plt.xlabel('Rank')
+    plt.ylabel('Zipf Frequency')
+    plt.show()
 
 freqs = read_subtlex_file('subtlex_english')
 most_frequent_words = get_n_most_frequent_words(freqs, 1000)
