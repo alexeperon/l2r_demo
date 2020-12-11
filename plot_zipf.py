@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 from math import log
 
+#I can't really work with Nicolò in my arms, but it's surely cute
+
 def read_subtlex_file(subtlex_file_path):
 	freqs = {}
 	with open(subtlex_file_path) as file:
